@@ -32,7 +32,7 @@ def bar_line(df, col, interval):
     plt.figure(figsize = (20,10))
     x, y = choose_data(df, col)
     #compute the seven day moving average
-    seven_day_average = [0,0,0,0,0,0] + [np.sum(y[i-6:i])/7 for i in range(6, len(y))]
+    seven_day_average = [0,0,0,0,0,0] + [np.sum(y[i-7:i])/7 for i in range(6, len(y))]
     ax = plt.subplot()
     #make the legend prettier 
     red_patch = mpatches.Patch(color='IndianRed', label=f'{col}')
