@@ -11,8 +11,8 @@ from datetime import datetime, timedelta
 
 #labels for plots, values are every <interval> days since Feb 15
 def get_xlabels(interval):
-    start = datetime(2020, 2, 14)
-    every_int = [start + timedelta(interval*i+1) for i in range(1000)]
+    start = datetime(2020, 3, 1)
+    every_int = [start + timedelta(interval*i) for i in range(1000)]
     every_int_str = [day.strftime('%b') +  ' ' + day.strftime('%d') for day in every_int]
     return every_int_str
 
@@ -36,9 +36,10 @@ def bar_line(df, col, interval):
     ax = plt.subplot()
     #make the legend prettier 
     red_patch = mpatches.Patch(color='IndianRed', label=f'{col}')
-    black_patch = mpatches.Patch(color='black', alpha=0.8, label='Seven Day Moving Average')
+    black_patch = mpatches.Patch(color='k', alpha=0.8, label='Seven Day Moving Average')
     sns.barplot(x, y, data=df, palette =  'Reds')
-    sns.lineplot(x, seven_day_average, data=df, color = 'black', alpha=0.8, linewidth =5)
+    sns.lineplot(x, seven_day_average, data=df, color = 'white', linewidth=8)
+    sns.lineplot(x, seven_day_average, data=df, color = 'k', alpha=1, linewidth=5)
     ax.set_xticks(np.linspace(0, interval * math.ceil(len(x)/interval)+1, len(x)//interval +2))
     ax.set_xticklabels(get_xlabels(interval)[:len(x)//interval+2], fontsize=12)
     ax.set_title(f'{col} of COVID-19', fontsize=20, fontweight='bold')
@@ -47,6 +48,7 @@ def bar_line(df, col, interval):
     plt.annotate('Data from https://www.worldometers.info/coronavirus/country/us/', (0,0), (-80,-40), fontsize=10, 
              xycoords='axes fraction', textcoords='offset points', va='top')
     plt.legend(handles = [red_patch, black_patch], loc='upper left', prop={'size': 15})
+    plt.savefig(f'{col} 7 day average.png')
     plt.show()
     
 #sets up plot with background style, axes labels, title
