@@ -17,7 +17,7 @@ def fit_gpr(df, col, range_max):
     #The following hyperparemeters were decided using a grid search cross-validation
     kernel = ExpSineSquared() + RBF() + Matern() + RationalQuadratic()
     if col == 'New Cases':
-        alpha = 3
+        alpha = 0.1
         normalize_y = True
     elif col == 'New Deaths':
         alpha = 0.1
@@ -64,7 +64,7 @@ def plot_gpr(df, col, range_max, interval):
     sns.lineplot(X_predict, prediction, data=df, label = f'GPR Predicted {col}', color = 'red', alpha = 0.5, linewidth=5)
     ax.set_xticks(xticks)
     ax.set_xticklabels(get_xlabels(interval)[:range_max//interval + 1], fontsize = 12)
-    plt.legend(loc = 'upper left', prop={'size': 15})
+    plt.legend(loc = 'upper right', prop={'size': 15})
     plt.savefig(f'{col} GPR.png')
     plt.show()
     

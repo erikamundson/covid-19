@@ -12,11 +12,12 @@ from plotstuff import choose_data, setup_plot, get_xlabels, get_xticks
 def gaussian_func(x, a, x0, sigma):
     return a * np.exp(-(x-x0)**2/(2*sigma**2))
 
+
 #get the parameters of a gaussian with given dataframe and column
 def gaussian_fit(df, col):
     x, y = choose_data(df, col)
-    initial_guess = [1, 20, 75]
-    popt, pcov = curve_fit(gaussian_func, x, y, p0 = initial_guess)
+    initial_guess = [1, 40, 75]
+    popt, pcov = curve_fit(gaussian_func, x, y, p0 = initial_guess, maxfev=5000)
     return popt, pcov
 
 #CDF, Cumulative Distribution Function, is the integral of a Gaussian but for our purposes we just use a sum since the data is integer-based. get_cdf returns a numeric sum of sum_col, which should correspond to col
