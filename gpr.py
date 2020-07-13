@@ -56,12 +56,14 @@ def get_gpr_sum(df, col,range_max):
 def plot_gpr(df, col, range_max, interval):
     plt.figure(figsize = (20,10))
     x, y = choose_data(df, col)
+    seven_day_average = [0,0,0,0,0,0] + [np.sum(y[i-7:i])/7 for i in range(6, len(y))]
     xticks = get_xticks(range_max, interval)
     ax = plt.subplot()
     setup_plot(df, col, range_max)
     X_predict, prediction = fit_gpr(df, col, range_max)
     sns.scatterplot(x, y, data=df, label = f'Actual {col}', color = 'Black', s=100)
     sns.lineplot(X_predict, prediction, data=df, label = f'GPR Predicted {col}', color = 'red', alpha = 0.5, linewidth=5)
+    sns.lineplot(x, seven_day_average, data=df, label = f'Seven Day Moving Average', color = 'green', alpha=0.5, linewidth=5)
     ax.set_xticks(xticks)
     ax.set_xticklabels(get_xlabels(interval)[:range_max//interval + 1], fontsize = 12)
     plt.legend(loc = 'upper right', prop={'size': 15})
