@@ -17,10 +17,10 @@ def fit_gpr(df, col, range_max):
     #The following hyperparemeters were decided using a grid search cross-validation
     kernel = ExpSineSquared() + RBF() + Matern() + RationalQuadratic()
     if col == 'New Cases':
-        alpha = 0.1
+        alpha = 1
         normalize_y = True
     elif col == 'New Deaths':
-        alpha = 1
+        alpha = 0.8
         normalize_y = True
     #Fitting the regressor and making the prediction
     gpr = GaussianProcessRegressor(kernel=kernel, alpha=alpha, n_restarts_optimizer=10, normalize_y = normalize_y)
