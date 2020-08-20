@@ -58,5 +58,5 @@ def setup_plot(df, col, range_max):
     plt.ylabel(f'{col}', fontsize=16)
     plt.title(f'{col} of COVID-19', fontsize=20, fontweight='bold')
     #Cite the data and Model
-    plt.annotate('Data from https://www.worldometers.info/coronavirus/country/us/\nGaussian Process Regressor from scikit-learn "Gaussian Process" package', (0,0), (-80,-40), fontsize=10, 
+    plt.annotate('Data from JHU CSSE COVID-19 Data: https://github.com/CSSEGISandData/COVID-19', (0,0), (-80,-40), fontsize=10, 
              xycoords='axes fraction', textcoords='offset points', va='top')
