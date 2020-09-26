@@ -13,15 +13,15 @@ from plotstuff import choose_data, setup_plot, get_xlabels, get_xticks
 from joblib import dump, load
 
 #fit GPR model
-def fit_gpr(df, col, range_max):
+def fit_gpr(df, col: str, range_max: int):
     #The following hyperparemeters were decided using a grid search cross-validation
     kernel = ExpSineSquared() + RBF() + Matern() + RationalQuadratic()
     if col == 'New Cases':
-        alpha = 1
-        normalize_y = True
+        alpha: float = 1
+        normalize_y: bool = True
     elif col == 'New Deaths':
-        alpha = 0.5
-        normalize_y = True
+        alpha: float = 0.5
+        normalize_y: bool = True
     #Fitting the regressor and making the prediction
     gpr = GaussianProcessRegressor(kernel=kernel, alpha=alpha, n_restarts_optimizer=10, normalize_y = normalize_y)
     X = choose_data(df, col)[0].reshape(-1, 1)
