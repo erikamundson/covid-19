@@ -45,7 +45,7 @@ def bar_line(df, col, interval):
     ax.set_title(f'{col} of COVID-19', fontsize=20, fontweight='bold')
     ax.set_xlabel('Date', fontsize=16)
     ax.set_ylabel(f'{col}', fontsize=16)
-    plt.annotate('Data from https://www.worldometers.info/coronavirus/country/us/', (0,0), (-80,-40), fontsize=10, 
+    plt.annotate('Data from JHU CSSE COVID-19 Data: https://github.com/CSSEGISandData/COVID-19', (0,0), (-80,-40), fontsize=10, 
              xycoords='axes fraction', textcoords='offset points', va='top')
     plt.legend(handles = [red_patch, black_patch], loc='upper left', prop={'size': 15})
     plt.savefig(f'{col} 7 day average.png')
